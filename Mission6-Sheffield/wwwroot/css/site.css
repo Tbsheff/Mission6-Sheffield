@@ -1,0 +1,211 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    background-color: #000;
+    color: #fff;
+}
+
+.logo {
+    font-weight: bold;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+}
+
+nav a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.language-selector a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    height: 80vh;
+    color: #fff;
+}
+
+.interactive-display {
+    margin-top: 2rem;
+    width: 50vw;
+    height: 50vh;
+    background-color: #a83232;
+    /* Add your own implementation for the interactive display */
+}
+
+.exhibit-visitor {
+    /* Add your own implementation for the exhibit visitor image */
+}
+
+footer {
+    background-color: #000;
+    color: #fff;
+    padding: 1rem 5%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.pagination {
+    font-size: 2rem;
+}
+
+
+.container-hero {
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: 0.65fr auto; /* Adjust this ratio as needed */
+    grid-template-rows: auto;
+    position: relative; /* This allows absolute positioning relative to this container */
+}
+
+.text-content {
+    grid-column: 1 / 2;
+    grid-row: 1;
+    z-index: 10; /* Ensure the text content stacks on top of the image */
+    padding: 20px; /* Add padding as needed */
+    background: rgba(255, 255, 255, 0.7); /* Adjust background color and transparency as needed */
+    /* Use absolute positioning to move the text block over the image */
+    position: absolute;
+    bottom: 50px; /* Adjust this value to move the text up or down */
+    left: 50px; /* Adjust this value to move the text left or right */
+}
+
+.image-content {
+    grid-column: 2 / 3;
+    grid-row: 1;
+    position: relative;
+}
+
+    .image-content img {
+        width: 100%; /* Adjust width as needed */
+        height: auto; /* Adjust height as needed */
+        display: block;
+    }
+
+.about-container {
+    display: flex;
+    margin: auto;
+    margin-bottom: 2rem;
+    flex-direction: column;
+    background-color: #eeeee7;
+    padding: 2rem;
+    border-radius: 10px;
+    max-width: 75%;
+}
+
+.about-content {
+    display: flex;
+    flex-direction: row;
+    gap: 6rem;
+    font-size: 1.5rem
+}
+
+    .about-content img {
+        max-width: 75%;
+        height: auto;
+    }
+
+    .about-content a {
+        text-decoration: none;
+        text-align: center;
+        align-self: center;
+    }
+
+h1 {
+    text-align: center;
+    padding: 1.5rem;
+}
+
+.movie-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding: 2rem;
+    width: fit-content;
+    margin: auto;
+    border-radius: 10px;
+    background-color: #eeeee7;
+}
+
+.movie-form-input {
+    display: inline-flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+}
+
+    .movie-form-input input {
+        background-color: #fff;
+    }
+
+main {
+    min-height: calc(100vh - 50px);
+    padding: 0;
+}
+
+
+.success-message{
+    display:none;
+    text-align: center;
+    font-size: 1.5rem;
+    padding: 1rem;
+}
+
+ol li::marker {
+    padding-left: 1rem;
+    font-weight: bold !important;
+    font-size: 2.5rem;
+}
+
+ol{
+padding: 2rem;
+}
+
+li{
+    padding: 1rem;
+}
