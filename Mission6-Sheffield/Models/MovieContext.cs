@@ -8,6 +8,6 @@ namespace Mission6_Sheffield.Models
         {
         }
 
-        public DbSet<movies> Movies { get; set; }
+        public DbSet<movies> Movies { get; set; } // constructor
     }
 }

@@ -6,22 +6,34 @@ namespace Mission6_Sheffield.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private MovieContext _context; // add private variable to reference in class
+        public HomeController(MovieContext movie) // constructor
+        {
+            _context = movie;
+        }
+        public IActionResult Index() // Index action
         {
             return View();
         }
 
-        public IActionResult about()
+        public IActionResult about() // about action
         {
             return View();
         }
-
-        public IActionResult addToCollection()
+        [HttpGet]
+        public IActionResult addToCollection() // add toCollection
         {
+
             return View();
         }
 
-
+        [HttpPost]
+        public IActionResult addToCollection(movies response) // add toCollection
+        {
+            _context.Movies.Add(response);
+            _context.SaveChanges();
+            return View("success");
+        }
 
     }
 }

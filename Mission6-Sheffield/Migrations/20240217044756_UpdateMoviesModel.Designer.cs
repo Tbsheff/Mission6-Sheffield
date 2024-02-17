@@ -10,8 +10,8 @@ using Mission6_Sheffield.Models;
 namespace Mission6_Sheffield.Migrations
 {
     [DbContext(typeof(MovieContext))]
-    [Migration("20240217011625_Initial")]
-    partial class Initial
+    [Migration("20240217044756_UpdateMoviesModel")]
+    partial class UpdateMoviesModel
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -22,6 +22,7 @@ namespace Mission6_Sheffield.Migrations
             modelBuilder.Entity("Mission6_Sheffield.Models.movies", b =>
                 {
                     b.Property<string>("Title")
+                        .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Category")
@@ -41,6 +42,7 @@ namespace Mission6_Sheffield.Migrations
 
                     b.Property<string>("Notes")
                         .IsRequired()
+                        .HasMaxLength(25)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Rating")
