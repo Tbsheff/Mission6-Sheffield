@@ -1,6 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Mission6_Sheffield.Models;
 using System.Diagnostics;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace Mission6_Sheffield.Controllers
 {
@@ -33,6 +36,22 @@ namespace Mission6_Sheffield.Controllers
             _context.Movies.Add(response);
             _context.SaveChanges();
             return View("success");
+        }
+
+        public IActionResult ViewCollection()
+        {
+            var movies = _context.Movies.Include(x => x.Category).ToList();
+
+            return View(movies);
+        }
+
+        public IActionResult EditCollection(int movieId)
+        {
+            var movie = _context.Movies.FirstOrDefault(x => x.MovieId == movieId);
+
+            _context.Movies.Update(movie);
+            _context.SaveChanges();
+            return View(movie);
         }
 
     }
