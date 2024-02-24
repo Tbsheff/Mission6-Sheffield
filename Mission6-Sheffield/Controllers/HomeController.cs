@@ -26,19 +26,19 @@ namespace Mission6_Sheffield.Controllers
             return View();
         }
         [HttpGet]
-        public IActionResult addToCollection(int? movieId)
+        public IActionResult addToCollection(int? movieId) // show form to add to collection
         {
-            ViewBag.Categories = _cat_context.Categories.ToList();
-            ViewBag.Ratings = _context.Movies.Select(x => x.Rating).Distinct().ToList();
-            ViewBag.Name = "Add to Collection";
+            ViewBag.Categories = _cat_context.Categories.ToList(); // list of categories
+            ViewBag.Ratings = _context.Movies.Select(x => x.Rating).Distinct().ToList(); // list of ratings
+            ViewBag.Name = "Add to Collection"; // title of page
 
-            if (movieId != null)
+            if (movieId != null) // if movieId is not null
             {
                 ViewBag.Movie = _context.Movies
                                 .Include(x => x.Category)
                                 .Single(x => x.MovieId == movieId);
             }
-            else
+            else // if movieId is null
             {
                 ViewBag.Movie = new movies
                 {
@@ -54,35 +54,35 @@ namespace Mission6_Sheffield.Controllers
         public IActionResult addToCollection(movies response) // add toCollection
         {
 
-            if (ModelState.IsValid)
+            if (ModelState.IsValid) // check if model is valid
             {
                 _context.Movies.Add(response);
                 _context.SaveChanges();
-                ViewBag.Message = "Thank you for adding a movie to Joel's collection!";
+                ViewBag.Message = "Thank you for adding a movie to Joel's collection!"; // success message
                 return View("success");
             }
-            else
+            else // if model is not valid
             {
                 ViewBag.Movie = response;
                 ViewBag.Categories = _cat_context.Categories.ToList();
-                return View(response);
+                return View(response); // return view with response
             }
 
         }
 
-        public IActionResult ViewCollection()
+        public IActionResult ViewCollection() // return view of collection
         {
-            var movies = _context.Movies.Include(x => x.Category).ToList();
+            var movies = _context.Movies.Include(x => x.Category).ToList(); // list of movies
 
             return View(movies);
         }
 
         [HttpGet]
-        public IActionResult Edit(int MovieId)
+        public IActionResult Edit(int MovieId) // redirect to form with movie data to edit
         {
-            ViewBag.Categories = _cat_context.Categories.ToList();
-            ViewBag.Ratings = _context.Movies.Select(x => x.Rating).Distinct().ToList();
-            ViewBag.Name = "Edit Movie";
+            ViewBag.Categories = _cat_context.Categories.ToList(); // list of categories
+            ViewBag.Ratings = _context.Movies.Select(x => x.Rating).Distinct().ToList(); // list of ratings
+            ViewBag.Name = "Edit Movie"; // title of page
             ViewBag.movie = _context.Movies
                                 .Include(x => x.Category)
                                 .Single(x => x.MovieId == MovieId);
@@ -91,14 +91,15 @@ namespace Mission6_Sheffield.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(movies response)
+        public IActionResult Edit(movies response) // post new edits to database
         {
             _context.Movies.Update(response);
             _context.SaveChanges();
             return View("success");
         }
+
         [HttpGet]
-        public IActionResult Delete(int MovieId)
+        public IActionResult Delete(int MovieId) // show delete view
         {
             ViewBag.movie = _context.Movies
                                 .Include(x => x.Category)
@@ -106,7 +107,7 @@ namespace Mission6_Sheffield.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Delete(movies response)
+        public IActionResult Delete(movies response) // delete movie after confirmation
         {
             _context.Movies.Remove(response);
             _context.SaveChanges();
