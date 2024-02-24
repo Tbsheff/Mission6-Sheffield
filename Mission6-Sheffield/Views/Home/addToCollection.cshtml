@@ -8,75 +8,137 @@
 @model movies
 <main>
     <div>
-        <h1>Add To Collection</h1>
+        <h1>@ViewBag.Name</h1>
         @* o For the Rating field, use a dropdown menu (G, PG, PG-13, R).
         o For the Edited field, we want that to be a yes/no (true/false) option.
         o The “Edited”, “Lent To”, and “Notes” are not required to create a new
         record. All other fields must be entered.
         o Notes should be limited to 25 characters. (#notcoveredinthevideos) *@
-        <form method="post" class="movie-form hide-on-submit" >
+        <form method="post" class="movie-form hide-on-submit">
             <div class="movie-form-input">
                 <label asp-for="Title">Title: </label>
-                <input asp-for="Title" required/>
+                <input asp-for="Title"  value="@ViewBag.Movie.Title" />
             </div>
 
             <div class="movie-form-input">
                 <label asp-for="Category">Category</label>
-                <input asp-for="Category" required />
+                <div class="radio-center">
+                    @foreach (var category in ViewBag.Categories)
+                    {
+                        <div>
+                            @if(ViewBag.Movie.CategoryId == category.CategoryId)
+                            {
+                                <input type="radio" asp-for="CategoryId" value="@category.CategoryId"
+                                    checked />
+                            }
+                            else
+                            {
+                                <input type="radio" asp-for="CategoryId" value="@category.CategoryId"
+                                    />
+                            }
+                            <label>@category.Category</label>
+                        </div>
+                    }
+                </div>
             </div>
 
             <div class="movie-form-input">
                 <label asp-for="Year">Year</label>
-                <input asp-for="Year" required />
+                <input asp-for="Year"  value="@ViewBag.Movie.Year" />
             </div>
 
             <div class="movie-form-input">
                 <label asp-for="Director">Director</label>
-                <input asp-for="Director" required />
+                <input asp-for="Director"  value="@ViewBag.Movie.Director" />
             </div>
 
             <div class="movie-form-input">
                 <label asp-for="Rating">Rating</label>
-                <select asp-for="Rating" required>
-                    <option value="G">G</option>
-                    <option value="PG">PG</option>
-                    <option value="PG-13">PG-13</option>
-                    <option value="R">R</option>
+                <select asp-for="Rating" >
+                    @foreach (var rating in ViewBag.Ratings)
+                    {
+                        @if(ViewBag.Movie.Rating == rating)
+                        {
+                            <option asp-for="Rating" value="@rating" selected>@rating</option>
+                        }
+                        else
+                        {
+                            <option asp-for="Rating" value="@rating">@rating</option>
+                        }
+                    }
                 </select>
             </div>
 
             <div class="movie-form-input">
                 <label asp-for="Edited">Edited</label>
                 <select asp-for="Edited">
-                    <option value="null" selected>Select an option</option>
-                    <option value="true">Yes</option>
-                    <option value="false">No</option>
+                    @if(ViewBag.Movie.Edited == null)
+                    {
+                        <option value="null" selected>Select an option</option>
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    }
+                    else if(ViewBag.Movie.Edited == true)
+                    {
+                        <option value="null" selected>Select an option</option>
+                        <option value="true" selected>Yes</option>
+                        <option value="false">No</option>
+                    }
+                    else if(ViewBag.Movie.Edited == false)
+                    {
+                        <option value="null" selected>Select an option</option>
+                        <option value="true">Yes</option>
+                        <option value="false" selected>No</option>
+                    }
+                    else
+                    {
+                        <option value="null" selected>Select an option</option>
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    })
+                    
                 </select>
             </div>
 
             <div class="movie-form-input">
                 <label asp-for="LentTo">Lent To</label>
-                <input asp-for="LentTo" />
+                <input asp-for="LentTo" value="@ViewBag.Movie.LentTo" />
+            </div>
+
+            <div class="movie-form-input">
+                <label asp-for="CopiedToPlex">Copied to Plex?</label>
+                <select asp-for="CopiedToPlex">
+                    <option value="null" selected>Select an option</option>
+                    @if(ViewBag.Movie.CopiedToPlex == null)
+                    {
+                        <option value="true" >Yes</option>
+                        <option value="false" >No</option>
+                    }
+                    else if(ViewBag.Movie.CopiedToPlex == true)
+                    {
+                        <option value="true" selected>Yes</option>
+                        <option value="false">No</option>
+                    }
+                    else if(ViewBag.Movie.CopiedToPlex == false)
+                    {
+                        <option value="true" >Yes</option>
+                        <option value="false" selected>No</option>
+                    })
+                </select>
             </div>
 
             <div class="movie-form-input">
                 <label asp-for="Notes">Notes</label>
-                <input asp-for="Notes" maxlength="25"/>
+                <input asp-for="Notes" maxlength="25" value="@ViewBag.Movie.Notes" />
             </div>
 
-            <input type="submit" value="Add To Collection" />
+            <input type="submit" value="@ViewBag.Name" />
+
+            <div asp-validation-summary="All"></div>
         </form>
 
-        
+
 
     </div>
 </main>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-    // $(".hide-on-submit").submit(function (event) {
-    //     event.preventDefault();
-    //     $(".movie-form").css("display", "none");
-    //     $(".success-message").css("display", "block");
-    // });
-
-</script>

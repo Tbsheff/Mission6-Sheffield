@@ -220,3 +220,8 @@ li {
     text-align: center;
     vertical-align: middle
 }
+
+.center{
+    text-align: center;
+    margin-top: 1rem;
+}
